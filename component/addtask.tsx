@@ -18,7 +18,7 @@ const AddTaskComponent: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [isCompleted, setIsCompleted] = useState<boolean>(false); // New state for task completion
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   const handleCategoryPress = (category: string) => {
     setSelectedCategory(category);
@@ -36,17 +36,13 @@ const AddTaskComponent: React.FC = () => {
         category: selectedCategory,
         title: title.trim(),
         description: description.trim(),
-        completed: isCompleted, // Include completed status in the task object
+        completed: isCompleted,
       };
 
-      // Retrieve existing tasks
       const storedTasks = await AsyncStorage.getItem('tasks');
       const tasksArray = storedTasks ? JSON.parse(storedTasks) : [];
-
-      // Save new task to AsyncStorage
       await AsyncStorage.setItem('tasks', JSON.stringify([...tasksArray, newTask]));
 
-      // Clear input fields after saving
       setSelectedCategory('');
       setTitle('');
       setDescription('');
