@@ -15,7 +15,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 const MainPage: React.FC = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [showCompleted, setShowCompleted] = useState<boolean>(false); // State for filtering completed tasks
+  const [showCompleted, setShowCompleted] = useState<boolean>(false);
   const navigation = useNavigation();
 
   const loadTasks = async () => {
@@ -29,12 +29,10 @@ const MainPage: React.FC = () => {
     }
   };
 
-  // Load tasks on initial render and on focus
   useEffect(() => {
     loadTasks();
   }, []);
 
-  // Reload tasks when returning to MainPage from AddTask
   useFocusEffect(
     useCallback(() => {
       loadTasks();
