@@ -55,19 +55,14 @@ const EditTaskComponent: React.FC = () => {
         category: selectedCategory,
         title,
         description,
-        completed
+        completed,
       };
-      // Retrieve existing tasks
       const storedTasks = await AsyncStorage.getItem('tasks');
       const tasksArray = storedTasks ? JSON.parse(storedTasks) : [];
-      // Update the edited task
       const updatedTasks = tasksArray.map((task: any) =>
         task.id === taskId ? newTask : task
       );
-      // Save updated tasks to AsyncStorage
       await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
-
-      // Optionally, navigate back to the main page
       navigation.goBack();
     } catch (error) {
       console.error('Error saving task:', error);
